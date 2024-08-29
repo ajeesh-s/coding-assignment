@@ -30,6 +30,7 @@ const Header = ({ searchMovies }) => {
       </nav>
 
       <div className="input-group rounded">
+//Link wrapping the input is unnecessary, consider to Remove Link to improve accessibility and form usability
         <Link to="/" onClick={(e) => searchMovies('')} className="search-link" >
           <input type="search" data-testid="search-movies"
             onKeyUp={(e) => searchMovies(e.target.value)} 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Routes, Route, createSearchParams, useSearchParams, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux'
+//The package "reactjs-popup" is listed in the package.json but is not currently being used in the application.Consider removing this unused dependency
 import 'reactjs-popup/dist/index.css'
 import { fetchMovies } from './data/moviesSlice'
 import { ENDPOINT_SEARCH, ENDPOINT_DISCOVER, ENDPOINT, API_KEY } from './constants'
@@ -11,6 +12,11 @@ import WatchLater from './components/WatchLater'
 import YouTubePlayer from './components/YoutubePlayer'
 import './app.scss'
 
+// The App.jsx file contains a mix of routing logic, API calls, component rendering, and state management.
+// Consider refactoring to improve organization and maintainability:
+// 1. Move route definitions to a separate Routes component or a routes configuration file.
+// 2. Refactor the code to change the logics to separate files.
+// 3. This will help keep App.jsx clean, and focused on high-level application logic, making it easier to maintain and extend.
 const App = () => {
 
   const state = useSelector((state) => state)
@@ -22,6 +28,7 @@ const App = () => {
   const [isOpen, setOpen] = useState(false)
   const navigate = useNavigate()
   
+  //consider removing ununsed code
   const closeModal = () => setOpen(false)
   
   const closeCard = () => {
@@ -57,6 +64,7 @@ const App = () => {
     setOpen(true)
   }
 
+  //consider error handling in the getMovie function.
   const getMovie = async (id) => {
     const URL = `${ENDPOINT}/movie/${id}?api_key=${API_KEY}&append_to_response=videos`
 
@@ -86,7 +94,7 @@ const App = () => {
         ) : (
           <div style={{padding: "30px"}}><h6>no trailer available. Try another movie</h6></div>
         )}
-
+        
         <Routes>
           <Route path="/" element={<Movies movies={movies} viewTrailer={viewTrailer} closeCard={closeCard} />} />
           <Route path="/starred" element={<Starred viewTrailer={viewTrailer} />} />

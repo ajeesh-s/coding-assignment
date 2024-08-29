@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
+  //consider error handling in the fetchMovies function.
 export const fetchMovies = createAsyncThunk('fetch-movies', async (apiUrl) => {
     const response = await fetch(apiUrl)
     return response.json()
