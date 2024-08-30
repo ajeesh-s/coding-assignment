@@ -5,23 +5,19 @@ export const fetchMovies = createAsyncThunk("fetch-movies", async (apiUrl) => {
   return response.json();
 });
 
+const initialState = {
+  movies: [],
+  page: 1,
+  totalPages: 0,
+  totalResults: 0,
+  fetchStatus: "",
+};
+
 const moviesSlice = createSlice({
   name: "movies",
-  initialState: {
-    movies: [],
-    page: 1,
-    totalPages: 0,
-    totalResults: 0,
-    fetchStatus: "",
-  },
+  initialState: initialState,
   reducers: {
-    resetState: (state) => {
-      state.movies = [];
-      state.page = 1;
-      state.totalPages = 0;
-      state.totalResults = 0;
-      state.fetchStatus = "";
-    },
+    resetState: (state) => initialState,
   },
   extraReducers: (builder) => {
     builder
