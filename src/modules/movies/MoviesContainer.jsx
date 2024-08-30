@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { fetchMovies } from "../../data/moviesSlice";
-import { useDispatch, useSelector } from "react-redux/es";
+import { useDispatch, useSelector } from "react-redux";
 import useInfiniteScroll from "../../hooks/useInfiniteScroll";
 import { useSearchParams } from "react-router-dom";
 import { resetState } from "../../data/moviesSlice";
@@ -35,7 +35,7 @@ const MoviesContainer = () => {
   useEffect(() => {
     const fetchInitialMovies = async () => {
       setInitialLoading(true);
-      dispatch(resetState());
+      await dispatch(resetState());
       await dispatch(fetchMovies(moviesEndPoint));
       setInitialLoading(false);
     };
