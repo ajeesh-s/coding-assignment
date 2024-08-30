@@ -16,6 +16,7 @@ const WatchLater = ({viewTrailer}) => {
       {watchLater.watchLaterMovies.length > 0 && (<div data-testid="watch-later-movies" className="starred-movies">
         <h6 className="header">Watch Later List</h6>
         <div className="row">
+//Consider calling Movies componenet here to avoid unwanted looping
         {watchLater.watchLaterMovies.map((movie) => (
           <Movie 
             movie={movie} 
