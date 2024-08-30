@@ -4,7 +4,6 @@ import routes from "./core/routes";
 import Header from "./components/Header";
 
 import "./app.scss";
-import "./styles/bootstrap-overrides.scss";
 
 const App = () => {
   return (

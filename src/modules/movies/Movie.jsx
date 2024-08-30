@@ -11,7 +11,7 @@ const Movie = ({ movie }) => {
   const { starred, watchLater } = state;
   const { starMovie, unstarMovie } = starredSlice.actions;
   const { addToWatchLater, removeFromWatchLater } = watchLaterSlice.actions;
-  const [videoKey, setVideoKey] = useState(null);
+  const [trailerData, setTrailerData] = useState(null);
   const [isOpen, setOpen] = useState(false);
   const [isCardOpened, setIsCardOpened] = useState(false);
 
@@ -27,28 +27,26 @@ const Movie = ({ movie }) => {
   };
 
   const viewTrailer = async (movie) => {
-    await getMovie(movie.id);
-    if (videoKey) {
-      setOpen(true);
-    }
+    setTrailerData(null);
+    const trailerData = await getTrailerData(movie.id);
+    setTrailerData(trailerData);
+    setOpen(true);
   };
 
-  const getMovie = async (id) => {
+  const getTrailerData = async (id) => {
     const URL = `${ENDPOINT}/movie/${id}?api_key=${API_KEY}&append_to_response=videos`;
     try {
-      setVideoKey(null);
       const videoData = await fetch(URL).then((response) => response.json());
 
       if (videoData.videos && videoData.videos.results.length) {
         const trailer = videoData.videos.results.find(
           (vid) => vid.type === "Trailer"
         );
-        if (trailer) {
-          setVideoKey(trailer.key);
-        }
+        return trailer || null;
       }
     } catch (error) {
       console.error("Error fetching movie data:", error);
+      return null;
     }
   };
 
@@ -139,7 +137,8 @@ const Movie = ({ movie }) => {
         <YoutubePlayer
           isModalOpen={isOpen}
           setModalOpen={closeModal}
-          videoKey={videoKey}
+          videoKey={trailerData?.key || ""}
+          title={trailerData?.name || ""}
         />
       ) : null}
       <div className="wrapper movie-item">

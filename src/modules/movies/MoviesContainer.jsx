@@ -7,6 +7,8 @@ import { resetState } from "../../data/moviesSlice";
 import { ENDPOINT_SEARCH, ENDPOINT_DISCOVER } from "../../constants";
 import Movies from "./Movies";
 
+import "../../styles/movies.scss";
+
 const MoviesContainer = () => {
   const state = useSelector((state) => state);
   const { movies } = state;

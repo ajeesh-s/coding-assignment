@@ -1,5 +1,4 @@
 import Movie from "./Movie";
-import "../../styles/movies.scss";
 
 const Movies = ({ movies, closeCard }) => {
   return (
